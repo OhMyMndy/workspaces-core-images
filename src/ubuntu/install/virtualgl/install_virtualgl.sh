@@ -25,9 +25,11 @@ if [ "$DISTRO" = "ubuntu" ]; then
         libglx0 libglx0:i386 \
         libegl1 libegl1:i386 \
         libgles2 libgles2:i386
-
-    add-apt-repository ppa:kisak/turtle
-    apt full-upgrade -y
+    source /etc/os-release
+    if [ "UBUNTU_CODENAME" != "noble" ]; then
+      add-apt-repository ppa:kisak/turtle
+      apt full-upgrade -y
+    fi
     dpkg -i $INST_SCRIPTS/virtualgl/virtualgl_*amd64.deb
   fi
 

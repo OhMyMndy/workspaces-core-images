@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -e
-
 if [ "${DISTRO}" == "parrotos6" ]; then
   PARROTEXTRA="-t lory-backports"
 fi
@@ -40,8 +39,11 @@ else
 fi
 
 if [ "$DISTRO" = "ubuntu" ]; then
-  #update mesa to latest
-  add-apt-repository ppa:kisak/turtle
-  apt-get update
-  apt full-upgrade -y
+  source /etc/os-release
+  if [ "UBUNTU_CODENAME" != "noble" ]; then
+    #update mesa to latest
+    add-apt-repository ppa:kisak/turtle
+    apt-get update
+    apt full-upgrade -y
+  fi
 fi
